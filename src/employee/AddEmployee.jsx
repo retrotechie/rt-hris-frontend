@@ -1,6 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 export default function AddEmployee() {
+  const [employee, setEmployee] = useState({
+    firstName: "",
+    lastName: "",
+    email: ""
+  });
+
+  // [Object destructuring](https://www.javascripttutorial.net/es6/javascript-object-destructuring/)
+  const { firstName, lastName, email } = employee;
+
+  const onInputChange = (e) => {
+    // `...employee` [spread operator](https://www.w3schools.com/react/react_es6_spread.asp)
+    setEmployee({ ...employee, [e.target.name]: e.target.value });  // keep adding new objects
+  };
+
   return (
     <div className='container'>
       <div className='row'>
@@ -14,8 +28,9 @@ export default function AddEmployee() {
               placeholder='Enter first name'
               name='firstName'
               id='FirstName'
-            >
-            </input>
+              value={firstName}
+              onChange={(e) => onInputChange(e)}
+            />
           </div>
           <div className='mb-3'>
             <label htmlFor='LastName' className='form-label'>Last Name</label>
@@ -25,8 +40,9 @@ export default function AddEmployee() {
               placeholder='Enter last name'
               name='lastName'
               id='LastName'
-            >
-            </input>
+              value={lastName}
+              onChange={(e) => onInputChange(e)}
+            />
           </div>
           <div className='mb-3'>
             <label htmlFor='Email' className='form-label'>E-mail</label>
@@ -36,8 +52,9 @@ export default function AddEmployee() {
               placeholder='Enter e-mail address'
               name='email'
               id='Email'
-            >
-            </input>
+              value={email}
+              onChange={(e) => onInputChange(e)}
+            />
           </div>
           <button type='submit' className='btn btn-outline-primary'>Submit</button>
           <button type='submit' className='btn btn-outline-danger mx-2'>Cancel</button>
